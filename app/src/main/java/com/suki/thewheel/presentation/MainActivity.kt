@@ -1,7 +1,8 @@
-package com.suki.thewheel
+package com.suki.thewheel.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.suki.thewheel.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
