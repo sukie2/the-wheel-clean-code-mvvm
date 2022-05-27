@@ -1,7 +1,7 @@
 package com.suki.thewheel.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.suki.thewheel.R
 
 class MainActivity : AppCompatActivity() {

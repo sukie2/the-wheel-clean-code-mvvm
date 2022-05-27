@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/manageEntriesFragment">
+
+    <fragment
+        android:id="@+id/manageEntriesFragment"
+        android:name="com.suki.thewheel.presentation.ManageEntriesFragment"
+        android:label="fragment_manage_entries"
+        tools:layout="@layout/fragment_manage_entries" >
+        <action
+            android:id="@+id/action_manageEntriesFragment_to_wheelFragment"
+            app:destination="@id/wheelFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wheelFragment"
+        android:name="com.suki.thewheel.presentation.WheelFragment"
+        android:label="WheelFragment" >
+        <action
+            android:id="@+id/action_wheelFragment_to_manageEntriesFragment"
+            app:destination="@id/manageEntriesFragment" />
+    </fragment>
+</navigation>
