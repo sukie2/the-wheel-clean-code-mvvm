@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/manageEntriesFragment"
-        android:name="com.suki.thewheel.presentation.ManageEntriesFragment"
+        android:name="com.suki.thewheel.presentation.entries.ManageEntriesFragment"
         android:label="fragment_manage_entries"
         tools:layout="@layout/fragment_manage_entries" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/wheelFragment"
-        android:name="com.suki.thewheel.presentation.WheelFragment"
+        android:name="com.suki.thewheel.presentation.wheel.WheelFragment"
         android:label="WheelFragment" >
         <action
             android:id="@+id/action_wheelFragment_to_manageEntriesFragment"
