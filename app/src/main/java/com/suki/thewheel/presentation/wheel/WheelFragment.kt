@@ -3,22 +3,24 @@ package com.suki.thewheel.presentation.wheel
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.suki.spinning_wheel.SpinningWheelView
 import com.suki.thewheel.R
 import com.suki.thewheel.databinding.FragmentWheelBinding
+import com.suki.thewheel.presentation.entries.EntryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class WheelFragment : Fragment() {
 
-    private val maAngle = 50f
     private val duration = 4000L
     private val timeForRotation = 50L
 
-    lateinit var binding: FragmentWheelBinding
+    private val viewModel: WheelViewModel by viewModels()
 
+    lateinit var binding: FragmentWheelBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +35,12 @@ class WheelFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpWheel()
         binding.buttonSpin.setOnClickListener {
-            binding.wheel.rotate(maAngle, duration, timeForRotation)
+            binding.wheel.rotate(viewModel.getRandomAngle(), duration, timeForRotation)
         }
+        subscribeToObservables()
     }
 
-    private fun setUpWheel(){
+    private fun setUpWheel() {
         binding.wheel.apply {
             isEnabled = false
             items = arrayListOf("sads", "asdas")
@@ -67,6 +70,12 @@ class WheelFragment : Fragment() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun subscribeToObservables() {
+        viewModel.entries.observe(viewLifecycleOwner) { list ->
+            binding.wheel.items = list.map { it.name }
         }
     }
 }

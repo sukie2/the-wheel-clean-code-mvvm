@@ -8,5 +8,5 @@
     <string name="entry">Entry</string>
     <string name="lets_go">Let\'s go</string>
     <string name="edit_entries">Edit Entries</string>
-    <string name="has_reached_limit">Has reached the max limit of 10</string>
+    <string name="has_reached_limit">Has reached the max limit of 20</string>
 </resources>

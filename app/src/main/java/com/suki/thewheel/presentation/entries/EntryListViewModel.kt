@@ -19,6 +19,8 @@ class EntryListViewModel @Inject constructor(
     private val insertEntry: InsertEntry
 ) : ViewModel() {
     private var getEntriesJob: Job? = null
+    private val entriesLowerLimit = 2
+    private val entriesUpperLimit = 20
 
     private val _entries = MutableLiveData<List<WheelEntry>>()
     val entries: LiveData<List<WheelEntry>> = _entries
@@ -41,11 +43,11 @@ class EntryListViewModel @Inject constructor(
     }
 
     fun isEntryListValid(): Boolean{
-        return entries.value?.size ?: 0 > 1
+        return entries.value?.size ?: 0 > entriesLowerLimit-1
     }
 
     fun hasReachedLimit(): Boolean {
-        return entries.value?.size ?: 0 > 9
+        return entries.value?.size ?: 0 > entriesUpperLimit-1
     }
 
 }
