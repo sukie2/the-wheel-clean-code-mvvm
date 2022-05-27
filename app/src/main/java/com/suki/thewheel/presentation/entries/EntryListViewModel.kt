@@ -44,4 +44,8 @@ class EntryListViewModel @Inject constructor(
         return entries.value?.size ?: 0 > 1
     }
 
+    fun hasReachedLimit(): Boolean {
+        return entries.value?.size ?: 0 > 9
+    }
+
 }

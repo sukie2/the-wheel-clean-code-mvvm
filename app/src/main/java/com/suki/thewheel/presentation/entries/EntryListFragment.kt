@@ -30,10 +30,10 @@ class EntryListFragment : Fragment() {
         subscribeToObservables()
 
         binding.addButton.setOnClickListener {
-            val entry = binding.editTextTextPersonName.text.toString()
+            val entry = binding.entryInputLayout.editText?.text.toString()
             if (entry.isNotEmpty()) {
                 viewModel.insertWheelEntry(entry)
-                binding.editTextTextPersonName.text.clear()
+                binding.entryInputLayout.editText?.text?.clear()
             }
         }
     }
@@ -60,6 +60,11 @@ class EntryListFragment : Fragment() {
     private fun subscribeToObservables() {
         viewModel.entries.observe(viewLifecycleOwner) {
             activity?.invalidateOptionsMenu()
+            if (viewModel.hasReachedLimit()) {
+                binding.addButton.isEnabled = false
+                binding.entryInputLayout.isEnabled = false
+                binding.entryInputLayout.error = getString(R.string.has_reached_limit)
+            }
         }
     }
 }
