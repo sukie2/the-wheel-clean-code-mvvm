@@ -1,6 +1,7 @@
 package com.suki.thewheel
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
-class TheWheelApplication: Application() {
-}
+@HiltAndroidApp
+class TheWheelApplication: Application()

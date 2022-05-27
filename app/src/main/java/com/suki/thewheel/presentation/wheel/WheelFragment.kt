@@ -7,8 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.suki.spinning_wheel.SpinningWheelView
 import com.suki.thewheel.R
 import com.suki.thewheel.databinding.FragmentWheelBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class WheelFragment : Fragment() {
 
     private val maAngle = 50f
@@ -16,6 +18,7 @@ class WheelFragment : Fragment() {
     private val timeForRotation = 50L
 
     lateinit var binding: FragmentWheelBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
