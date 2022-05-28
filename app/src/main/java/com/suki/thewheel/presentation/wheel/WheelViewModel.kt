@@ -26,7 +26,7 @@ class WheelViewModel @Inject constructor(
         getWheelEntries()
     }
 
-    private fun getWheelEntries() {
+    fun getWheelEntries() {
         getEntriesJob?.cancel()
         getEntriesJob = getEntries.invoke().onEach {
             _entries.value = it
