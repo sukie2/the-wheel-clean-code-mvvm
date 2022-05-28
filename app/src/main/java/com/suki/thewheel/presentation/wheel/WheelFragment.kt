@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import com.suki.spinning_wheel.SpinningWheelView
 import com.suki.thewheel.R
 import com.suki.thewheel.databinding.FragmentWheelBinding
-import com.suki.thewheel.presentation.entries.EntryListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
