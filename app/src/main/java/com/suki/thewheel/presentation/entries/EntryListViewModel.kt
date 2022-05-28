@@ -42,12 +42,12 @@ class EntryListViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun isEntryListValid(): Boolean{
-        return entries.value?.size ?: 0 > entriesLowerLimit-1
+    fun isEntryListValid(currentSize: Int): Boolean{
+        return currentSize > entriesLowerLimit-1
     }
 
-    fun hasReachedLimit(): Boolean {
-        return entries.value?.size ?: 0 > entriesUpperLimit-1
+    fun hasReachedLimit(currentSize: Int): Boolean {
+        return currentSize > entriesUpperLimit-1
     }
 
 }

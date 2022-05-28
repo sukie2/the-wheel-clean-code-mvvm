@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class EntryListFragment : Fragment() {
     private lateinit var binding: FragmentEntryListBinding
     private val viewModel: EntryListViewModel by viewModels()
+    private var isMenuEnabled = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +41,7 @@ class EntryListFragment : Fragment() {
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        menu.findItem(R.id.action_lets_go).isEnabled = viewModel.isEntryListValid()
+        menu.findItem(R.id.action_lets_go).isEnabled = isMenuEnabled
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -59,11 +60,21 @@ class EntryListFragment : Fragment() {
 
     private fun subscribeToObservables() {
         viewModel.entries.observe(viewLifecycleOwner) {
+
+            isMenuEnabled = viewModel.isEntryListValid(it.size)
             activity?.invalidateOptionsMenu()
-            if (viewModel.hasReachedLimit()) {
-                binding.addButton.isEnabled = false
-                binding.entryInputLayout.isEnabled = false
-                binding.entryInputLayout.error = getString(R.string.has_reached_limit)
+
+            if(it.isEmpty()){
+                binding.emptyMessage.visibility = View.VISIBLE
+                binding.entryRecyclerView.visibility = View.INVISIBLE
+            }
+
+            if (viewModel.hasReachedLimit(it.size)) {
+                binding.apply {
+                    addButton.isEnabled = false
+                    entryInputLayout.isEnabled = false
+                    entryInputLayout.error = getString(R.string.has_reached_limit)
+                }
             }
         }
     }
