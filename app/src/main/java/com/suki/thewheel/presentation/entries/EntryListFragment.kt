@@ -5,14 +5,17 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.suki.thewheel.R
 import com.suki.thewheel.databinding.FragmentEntryListBinding
+import com.suki.thewheel.domain.model.WheelEntry
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class EntryListFragment : Fragment() {
     private lateinit var binding: FragmentEntryListBinding
     private val viewModel: EntryListViewModel by viewModels()
+    private lateinit var entryAdapter : EntryAdapter
     private var isMenuEnabled = true
 
     override fun onCreateView(
@@ -27,6 +30,19 @@ class EntryListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        entryAdapter = EntryAdapter { entry ->
+            adapterOnClick(entry)
+        }
+
+        binding.entryRecyclerView.apply {
+            layoutManager = LinearLayoutManager(
+                activity
+            )
+            adapter = entryAdapter
+        }
+
+        binding.entryRecyclerView.adapter = entryAdapter
 
         subscribeToObservables()
 
@@ -58,15 +74,24 @@ class EntryListFragment : Fragment() {
         }
     }
 
+    private fun adapterOnClick(entry: WheelEntry) {
+        viewModel.deleteEntry(entry)
+    }
+
     private fun subscribeToObservables() {
         viewModel.entries.observe(viewLifecycleOwner) {
 
             isMenuEnabled = viewModel.isEntryListValid(it.size)
             activity?.invalidateOptionsMenu()
 
+            entryAdapter.submitList(it as MutableList<WheelEntry>)
+
             if(it.isEmpty()){
                 binding.emptyMessage.visibility = View.VISIBLE
                 binding.entryRecyclerView.visibility = View.INVISIBLE
+            }else {
+                binding.emptyMessage.visibility = View.INVISIBLE
+                binding.entryRecyclerView.visibility = View.VISIBLE
             }
 
             if (viewModel.hasReachedLimit(it.size)) {
@@ -74,6 +99,12 @@ class EntryListFragment : Fragment() {
                     addButton.isEnabled = false
                     entryInputLayout.isEnabled = false
                     entryInputLayout.error = getString(R.string.has_reached_limit)
+                }
+            }else {
+                binding.apply {
+                    addButton.isEnabled = true
+                    entryInputLayout.isEnabled = true
+                    entryInputLayout.isErrorEnabled = false
                 }
             }
         }

@@ -19,6 +19,7 @@ class EntryListViewModel @Inject constructor(
     private val insertEntry: InsertEntry
 ) : ViewModel() {
     private var getEntriesJob: Job? = null
+    private var deleteEntriesJob: Job? = null
     private val entriesLowerLimit = 2
     private val entriesUpperLimit = 20
 
@@ -32,6 +33,13 @@ class EntryListViewModel @Inject constructor(
     fun insertWheelEntry(entryName: String) {
         viewModelScope.launch {
             insertEntry(WheelEntry(name = entryName))
+        }
+    }
+
+    fun deleteEntry(entry: WheelEntry){
+        deleteEntriesJob?.cancel()
+        deleteEntriesJob = viewModelScope.launch {
+            deleteEntry.invoke(entry)
         }
     }
 
