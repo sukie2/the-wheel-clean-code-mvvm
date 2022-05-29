@@ -1,15 +1,28 @@
-Android RecyclerView Sample (Kotlin)
+The Wheel - Android
 ====================================
 
 
-Pre-requisites
---------------
+Architecture
+------------
+- Clean code
+- MVVM
 
+Tech stack
+------------
+- Kotlin
+- Hilt
+- Jetpack
+- Navigation component
+- Coroutines
+- Room
+- JUnit
+- Espresso
 
 Screenshots
 -------------
 
 
 
-Support
+Credits
 -------
+- Wheel UI component https://github.com/adef145/SpinningWheelAndroid
