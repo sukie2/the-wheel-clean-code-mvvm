@@ -4,7 +4,7 @@
     <string name="spin">Spin it</string>
     <string name="manage_list">manage list</string>
     <string name="add">Add</string>
-    <string name="entry">Entry</string>
+    <string name="add_entry">Add entry</string>
     <string name="lets_go">Let\'s go</string>
     <string name="edit_entries">Edit Entries</string>
     <string name="has_reached_limit">Has reached the max limit of 20</string>
