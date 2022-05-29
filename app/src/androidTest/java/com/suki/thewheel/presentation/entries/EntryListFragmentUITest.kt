@@ -7,7 +7,11 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.suki.thewheel.R
+import com.suki.thewheel.di.AppModule
 import com.suki.thewheel.presentation.MainActivity
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import org.hamcrest.Matchers
 import org.junit.Rule
 import org.junit.Test
@@ -15,7 +19,12 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
+@HiltAndroidTest
+@UninstallModules(AppModule::class)
 class EntryListFragmentUITest {
+
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
