@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_entry_list" >
         <action
             android:id="@+id/action_manageEntriesFragment_to_wheelFragment"
-            app:destination="@id/wheelFragment" />
+            app:destination="@id/wheelFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment
         android:id="@+id/wheelFragment"
@@ -20,6 +21,8 @@
         android:label="WheelFragment" >
         <action
             android:id="@+id/action_wheelFragment_to_manageEntriesFragment"
-            app:destination="@id/manageEntriesFragment" />
+            app:destination="@id/manageEntriesFragment"
+            app:enterAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/nav_graph" />
     </fragment>
 </navigation>
