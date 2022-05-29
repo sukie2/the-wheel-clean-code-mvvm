@@ -3,6 +3,7 @@ package com.suki.thewheel.data.repository
 import com.suki.thewheel.domain.model.WheelEntry
 import com.suki.thewheel.domain.repository.EntryRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 
 class FakeEntryRepository : EntryRepository {
@@ -12,7 +13,7 @@ class FakeEntryRepository : EntryRepository {
     private val entries = flowOf(entriesList)
 
     override fun getEntries(): Flow<List<WheelEntry>> {
-        return entries
+        return flow { emit(entriesList) }
     }
 
     override suspend fun insertEntry(wheelEntry: WheelEntry) {
