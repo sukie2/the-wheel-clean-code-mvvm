@@ -20,7 +20,7 @@ class EntryListViewModel @Inject constructor(
 ) : ViewModel() {
     private var getEntriesJob: Job? = null
     private var deleteEntriesJob: Job? = null
-    private val entriesLowerLimit = 2
+    private val entriesLowerLimit = 1
     private val entriesUpperLimit = 20
 
     private val _entries = MutableLiveData<List<WheelEntry>>()
@@ -36,26 +36,26 @@ class EntryListViewModel @Inject constructor(
         }
     }
 
-    fun deleteEntry(entry: WheelEntry){
+    fun deleteEntry(entry: WheelEntry) {
         deleteEntriesJob?.cancel()
         deleteEntriesJob = viewModelScope.launch {
             deleteEntry.invoke(entry)
         }
     }
 
-    private fun getWheelEntries(){
+    fun getWheelEntries() {
         getEntriesJob?.cancel()
         getEntriesJob = getEntries.invoke().onEach {
             _entries.value = it
         }.launchIn(viewModelScope)
     }
 
-    fun isEntryListValid(currentSize: Int): Boolean{
-        return currentSize > entriesLowerLimit-1
+    fun isEntryListValid(currentSize: Int): Boolean {
+        return currentSize > entriesLowerLimit
     }
 
     fun hasReachedLimit(currentSize: Int): Boolean {
-        return currentSize > entriesUpperLimit-1
+        return currentSize > entriesUpperLimit - 1
     }
 
 }
