@@ -18,8 +18,10 @@ Tech stack
 - JUnit
 - Espresso
 
+
 Screenshots
 -------------
+![alt text](screenshots/screen_shot2.PNG)   ![alt text](screenshots/screen_shot1.PNG)
 
 
 
