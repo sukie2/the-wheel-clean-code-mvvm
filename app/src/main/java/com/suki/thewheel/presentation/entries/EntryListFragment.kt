@@ -48,7 +48,7 @@ class EntryListFragment : Fragment() {
 
         binding.addButton.setOnClickListener {
             val entry = binding.entryInputLayout.editText?.text.toString()
-            if (entry.isNotEmpty()) {
+            if (entry.isNotBlank()) {
                 viewModel.insertWheelEntry(entry)
                 binding.entryInputLayout.editText?.text?.clear()
             }
